@@ -44,10 +44,10 @@ jobs:
       - name: Build Release APK
         working-directory: ./داستان تعاملی
         run: |
-          ./gradlew assembleRelease
+          gradle assembleRelease
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: release-apk
-          path: داستان تعاملی/app/build/outputs/apk/release/*.apk
+          name: signed-release-apk
+          path: ./داستان تعاملی/app/build/outputs/apk/release/*.apk
