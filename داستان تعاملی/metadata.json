@@ -1,0 +1,6 @@
+{
+  "name": "داستان تعاملی",
+  "description": "رمان تصویری فانتزی تاریک و تعاملی به زبان فارسی با سیستم شخصیت‌سازی، انتخاب‌های مؤثر، سیستم سطح و سکه و پشتیبانی آفلاین.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
