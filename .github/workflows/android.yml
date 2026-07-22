@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -23,8 +24,6 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: "9.3.1"
 
       - name: Create local.properties
         working-directory: ./داستان تعاملی
@@ -36,13 +35,19 @@ jobs:
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > my-upload-key.jks
 
+      - name: Setup signing variables
+        run: |
+          echo "KEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}" >> $GITHUB_ENV
+          echo "KEY_ALIAS=${{ secrets.KEY_ALIAS }}" >> $GITHUB_ENV
+          echo "KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> $GITHUB_ENV
+
       - name: Build Release APK
         working-directory: ./داستان تعاملی
         run: |
-          gradle assembleRelease
+          ./gradlew assembleRelease
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: signed-release-apk
-          path: ./داستان تعاملی/app/build/outputs/apk/release/*.apk
+          name: release-apk
+          path: داستان تعاملی/app/build/outputs/apk/release/*.apk
